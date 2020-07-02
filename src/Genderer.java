@@ -32,6 +32,7 @@ public class Genderer {
 
     void determineGender() {
 //        System.out.println("aaa");
+        /////
         try {
             // This will load the MySQL (postgresql) driver, each DB has its own driver
             Class.forName("org.postgresql.Driver");  // "com.mysql.jdbc.Driver"
