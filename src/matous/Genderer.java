@@ -25,15 +25,11 @@ public class Genderer {
 
     DatabaseConnection databaseConnection;
 
-    public Genderer() {
-        databaseConnection = new DatabaseConnection();
+    public Genderer(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
     }
 
     // Public Methods:
-
-    public boolean dbConnect() {
-        return databaseConnection.connect();
-    }
 
     public String gender_firstName(String firstName) {
         return gender(true, false, firstName);

@@ -2,6 +2,7 @@ package test.matous;
 
 import matous.Genderer;
 
+import matous.database.DatabaseConnection;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,16 +12,16 @@ public class Genderer_Test {
     Genderer genderer;
 
     public Genderer_Test() {
-        genderer = new Genderer();
+        DatabaseConnection dc = new DatabaseConnection();
+        if (!dc.connect()) {
+            System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
+            return;
+        }
+        genderer = new Genderer(dc);
     }
 
     @Test
     void test() {
-        if (!genderer.dbConnect()) {
-            System.out.println("DetermineGender.DetermineGender()  Database not connected.");
-            return;
-        }
-
         String[][][] names;
         // 3D array "String[][][] names": every row contains two columns with several values.
         // First column (input) contains first name and surname.
