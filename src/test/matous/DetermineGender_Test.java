@@ -109,7 +109,7 @@ public class DetermineGender_Test {
         }
         // First name and surname - random - used method vocativeName_isFound():
         for (String[][] name : names) {
-            assertEquals(name[1][2], inflectioner.vocativeName_isFound(name[0][0], name[0][1]));
+            assertEquals(name[1][2], inflectioner.vocativeName_bothNamesVocative(name[0][0], name[0][1]));
         }
     }
 }

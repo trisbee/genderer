@@ -66,10 +66,10 @@ public class Inflectioner {
         }
     }
 
-    public String vocativeName_isFound(String firstName, String surname) {
+    public String vocativeName_bothNamesVocative(String firstName, String surname) {
         /*
          * Return vocative name form. Join first name and surname.
-         * If not found vocative name form, return "null".
+         * If not found both vocative names form, return "null".
          */
 
         String vocativeName_firstName = vocativeName_firstName(firstName);

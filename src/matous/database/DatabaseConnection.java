@@ -56,7 +56,7 @@ public class DatabaseConnection {
 
         rs = databaseQuery(isFirstName, isSurname, name);
 
-        if (rs == null) {  // TODO Is right solution?
+        if (rs == null) {  // TODO Is right solution? It is wanted?
             return null;
         }
 
