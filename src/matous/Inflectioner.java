@@ -14,22 +14,22 @@ public class Inflectioner {
         this.databaseConnection = databaseConnection;
     }
 
-    public String vocativeName_firstName(String firstName) {
+    public String firstName(String firstName) {
         return vocativeName(true, false, firstName);
     }
 
-    public String vocativeName_surname(String surname) {
+    public String surname(String surname) {
         return vocativeName(false, true, surname);
     }
 
-    public String vocativeName(String firstName, String surname) {
+    public String firstNameAndSurname(String firstName, String surname) {
         /*
          * Return vocative name form. Join first name and surname. If name length equals 0, do not join this name.
          * If not found vocative name form, use origin form.
          */
 
-        String vocativeName_firstName = vocativeName_firstName(firstName);
-        String vocativeName_surname = vocativeName_surname(surname);
+        String vocativeName_firstName = firstName(firstName);
+        String vocativeName_surname = surname(surname);
 
         if (vocativeName_firstName == null && vocativeName_surname == null) {
             if (firstName.length() == 0 && surname.length() == 0) {
@@ -66,14 +66,14 @@ public class Inflectioner {
         }
     }
 
-    public String vocativeName_bothNamesVocative(String firstName, String surname) {
+    public String firstNameAndSurname_bothNamesVocative(String firstName, String surname) {
         /*
          * Return vocative name form. Join first name and surname.
          * If not found both vocative names form, return "null".
          */
 
-        String vocativeName_firstName = vocativeName_firstName(firstName);
-        String vocativeName_surname = vocativeName_surname(surname);
+        String vocativeName_firstName = firstName(firstName);
+        String vocativeName_surname = surname(surname);
 
         if (vocativeName_firstName == null || vocativeName_surname == null) {
             return null;

@@ -56,8 +56,8 @@ public class DetermineGender_Test {
                 {{"", ""}, {null, null}},
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.gender_firstName(name[0][0]));
-            assertEquals(name[1][1], inflectioner.vocativeName_firstName(name[0][0]));
+            assertEquals(name[1][0], genderer.firstName(name[0][0]));
+            assertEquals(name[1][1], inflectioner.firstName(name[0][0]));
         }
 
         // Surname:
@@ -73,8 +73,8 @@ public class DetermineGender_Test {
                 {{"", "M"}, {null, null}},
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.gender_surname(name[0][1]));
-            assertEquals(name[1][1], inflectioner.vocativeName_surname(name[0][1]));
+            assertEquals(name[1][0], genderer.surname(name[0][1]));
+            assertEquals(name[1][1], inflectioner.surname(name[0][1]));
         }
 
         // First name and surname:
@@ -86,8 +86,8 @@ public class DetermineGender_Test {
                 {{"George", "Hill"}, {"MALE", "George Hille"}},
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.gender(name[0][0], name[0][1]));
-            assertEquals(name[1][1], inflectioner.vocativeName(name[0][0], name[0][1]));
+            assertEquals(name[1][0], genderer.firstNameAndSurname(name[0][0], name[0][1]));
+            assertEquals(name[1][1], inflectioner.firstNameAndSurname(name[0][0], name[0][1]));
         }
 
         // First name and surname - random:
@@ -103,13 +103,13 @@ public class DetermineGender_Test {
                 {{"Jára", "Cimrman"}, {null, "Járo Cimrmane", "FEMALE", "Járo Cimrmane"}},  // Note: there is only female first name "Jára".
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.gender(name[0][0], name[0][1]));
-            assertEquals(name[1][1], inflectioner.vocativeName(name[0][0], name[0][1]));
+            assertEquals(name[1][0], genderer.firstNameAndSurname(name[0][0], name[0][1]));
+            assertEquals(name[1][1], inflectioner.firstNameAndSurname(name[0][0], name[0][1]));
         }
         // First name and surname - random - used method vocativeName_isFound():
         for (String[][] name : names) {
-            assertEquals(name[1][2], genderer.gender_preferFirstName(name[0][0], name[0][1]));
-            assertEquals(name[1][3], inflectioner.vocativeName_bothNamesVocative(name[0][0], name[0][1]));
+            assertEquals(name[1][2], genderer.firstNameAndSurname_preferFirstName(name[0][0], name[0][1]));
+            assertEquals(name[1][3], inflectioner.firstNameAndSurname_bothNamesVocative(name[0][0], name[0][1]));
         }
     }
 }
