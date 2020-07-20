@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        Genderer_Test.class,
+        DetermineGender_Test.class,
 })
 
 public class Tests {

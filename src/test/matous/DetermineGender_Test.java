@@ -1,23 +1,31 @@
 package test.matous;
 
-import matous.Genderer;
+/*
+ * Genderer class and Inflectioner class tested together.
+ * Results depends on data inserted in database tables.
+ */
 
-import matous.database.DatabaseConnection;
-import org.junit.jupiter.api.Test;
+        import matous.Genderer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+        import matous.Inflectioner;
+        import matous.database.DatabaseConnection;
+        import org.junit.jupiter.api.Test;
 
-public class Genderer_Test {
+        import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class DetermineGender_Test {
 
     Genderer genderer;
+    Inflectioner inflectioner;
 
-    public Genderer_Test() {
+    public DetermineGender_Test() {
         DatabaseConnection dc = new DatabaseConnection();
         if (!dc.connect()) {
             System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
             return;
         }
         genderer = new Genderer(dc);
+        inflectioner = new Inflectioner(dc);
     }
 
     @Test
@@ -49,7 +57,7 @@ public class Genderer_Test {
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], genderer.gender_firstName(name[0][0]));
-            assertEquals(name[1][1], genderer.vocativeName_firstName(name[0][0]));
+            assertEquals(name[1][1], inflectioner.vocativeName_firstName(name[0][0]));
         }
 
         // Surname:
@@ -66,7 +74,7 @@ public class Genderer_Test {
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], genderer.gender_surname(name[0][1]));
-            assertEquals(name[1][1], genderer.vocativeName_surname(name[0][1]));
+            assertEquals(name[1][1], inflectioner.vocativeName_surname(name[0][1]));
         }
 
         // First name and surname:
@@ -79,7 +87,7 @@ public class Genderer_Test {
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], genderer.gender(name[0][0], name[0][1]));
-            assertEquals(name[1][1], genderer.vocativeName(name[0][0], name[0][1]));
+            assertEquals(name[1][1], inflectioner.vocativeName(name[0][0], name[0][1]));
         }
 
         // First name and surname - random:
@@ -97,11 +105,11 @@ public class Genderer_Test {
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], genderer.gender(name[0][0], name[0][1]));
-            assertEquals(name[1][1], genderer.vocativeName(name[0][0], name[0][1]));
+            assertEquals(name[1][1], inflectioner.vocativeName(name[0][0], name[0][1]));
         }
         // First name and surname - random - used method vocativeName_isFound():
         for (String[][] name : names) {
-            assertEquals(name[1][2], genderer.vocativeName_isFound(name[0][0], name[0][1]));
+            assertEquals(name[1][2], inflectioner.vocativeName_isFound(name[0][0], name[0][1]));
         }
     }
 }
