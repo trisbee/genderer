@@ -92,16 +92,15 @@ public class DetermineGender_Test {
 
         // First name and surname - random:
         names = new String[][][] {
-                {{"", ""}, {null, null, null}},
-                {{"abc", ""}, {null, "abc", null}},
-                {{"", "abc"}, {null, "abc", null}},
-                {{"-", ""}, {null, "-", null}},
-                {{"", "-"}, {null, "-", null}},
-                {{"", "abc_-*"}, {null, "abc_-*", null}},
-                {{"Martina", ""}, {"FEMALE", "Martino", null}},
-                {{"", "Martina"}, {"MALE", "Martino", null}},
-                {{"", "Martina"}, {"MALE", "Martino", null}},
-                {{"Jára", "Cimrman"}, {null, "Járo Cimrmane", "Járo Cimrmane"}},  // Note: there is only female first name "Jára".
+                {{"", ""}, {null, null, null, null}},
+                {{"abc", ""}, {null, "abc", null, null}},
+                {{"", "abc"}, {null, "abc", null, null}},
+                {{"-", ""}, {null, "-", null, null}},
+                {{"", "-"}, {null, "-", null, null}},
+                {{"", "abc_-*"}, {null, "abc_-*", null, null}},
+                {{"Martina", ""}, {"FEMALE", "Martino", "FEMALE", null}},
+                {{"", "Martina"}, {"MALE", "Martino", "MALE", null}},
+                {{"Jára", "Cimrman"}, {null, "Járo Cimrmane", "FEMALE", "Járo Cimrmane"}},  // Note: there is only female first name "Jára".
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], genderer.gender(name[0][0], name[0][1]));
@@ -109,7 +108,8 @@ public class DetermineGender_Test {
         }
         // First name and surname - random - used method vocativeName_isFound():
         for (String[][] name : names) {
-            assertEquals(name[1][2], inflectioner.vocativeName_bothNamesVocative(name[0][0], name[0][1]));
+            assertEquals(name[1][2], genderer.gender_preferFirstName(name[0][0], name[0][1]));
+            assertEquals(name[1][3], inflectioner.vocativeName_bothNamesVocative(name[0][0], name[0][1]));
         }
     }
 }

@@ -25,7 +25,7 @@ public class Genderer {
     public String gender(String firstName, String surname) {
         /*
          * Return gender determined by first name and surname.
-         * If contradict each other, return "null", otherwise prefer first name result.
+         * If contradict each other, return "null".
          * If not found, return "null".
          */
 
@@ -40,6 +40,27 @@ public class Genderer {
         }
         else {
             return gender_surname;
+        }
+    }
+
+    public String gender_preferFirstName(String firstName, String surname) {
+        /*
+         * Return gender determined by first name and surname.
+         * If contradict each other, prefer first name.
+         * If not found, return "null".
+         */
+
+        String gender_firstName = gender_firstName(firstName);
+        String gender_surname = gender_surname(surname);
+
+        if (gender_firstName != null) {
+            return gender_firstName;
+        }
+        else if (gender_surname != null) {
+            return gender_surname;
+        }
+        else {
+            return null;
         }
     }
 
