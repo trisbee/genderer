@@ -13,8 +13,9 @@ package matous;
  * 1) Determine gender by received name.
  * 2) Return vocative form by received name.
  *
- * A) Only first name or only surname.
- * B) Both first name and surname.
+ * A) Only first name.
+ * B) Only surname.
+ * C) Both first name and surname.
  *
  * Developed for name inflections in czech language.
  */
