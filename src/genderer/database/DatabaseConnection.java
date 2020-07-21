@@ -32,7 +32,7 @@ public class DatabaseConnection {
 //    public final String VALUE_FEMALE = "FEMALE";
 
     //
-    final String[][] RESULTSET_COLUMNINDEXES = {
+    final String[][] INDEXESATRESULTSET = {
             {"1", COLUMN_GENDER},
             {"2", COLUMN_VOCATIVE},
     };
@@ -45,12 +45,12 @@ public class DatabaseConnection {
         return postgreSQL.connect();
     }
 
-    public String getValueFromDatabase(boolean isFirstName, boolean isSurname, String getColumn, String name) {
+    public String getValueFromDatabase(boolean isFirstName, boolean isSurname, String wantedValue, String name) {
         /*
          * Get value from database at certain column.
          */
 
-        int getColumnIndex = Integer.parseInt(returnValue_2DArray(getColumn));
+        int wantedIndexAtResultSet = Integer.parseInt(getIndexAtResultSet(getColumn));
         ResultSet rs;
         String value;
 
@@ -62,7 +62,7 @@ public class DatabaseConnection {
 
         try {
             rs.next();
-            value = rs.getString(getColumnIndex);
+            value = rs.getString(wantedIndexAtResultSet);
         }
         catch (SQLException e1) {
             // If "ResultSet" is empty, return "null".
@@ -97,8 +97,8 @@ public class DatabaseConnection {
                 "' ORDER BY " + COLUMN_OCCURRENCE + " DESC LIMIT 1;");
     }
 
-    String returnValue_2DArray(String findValue) {
-        for (String[] strings : RESULTSET_COLUMNINDEXES) {
+    String getIndexAtResultSet(String findValue) {
+        for (String[] strings : INDEXESATRESULTSET) {
             if (strings[1].equals(findValue)) {
                 return strings[0];
             }
