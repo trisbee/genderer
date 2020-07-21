@@ -56,15 +56,16 @@ public class Genderer {
         if (gender_firstName != null) {
             return gender_firstName;
         }
-        else if (gender_surname != null) {
-            return gender_surname;
-        }
         else {
-            return null;
+            return gender_surname;
         }
     }
 
     private String gender(boolean isFirstName, boolean isSurname, String name) {
-        return databaseConnection.getValueFromDatabase(isFirstName, isSurname, databaseConnection.COLUMN_GENDER, name);
+        String[] result = databaseConnection.getValuesFromDatabase(isFirstName, isSurname, name, databaseConnection.COLUMN_GENDER);
+        if (result == null) {
+            return null;
+        }
+        return result[0];
     }
 }

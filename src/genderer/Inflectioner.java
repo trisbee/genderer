@@ -84,7 +84,11 @@ public class Inflectioner {
     }
 
     private String vocativeName(boolean isFirstName, boolean isSurname, String name) {
-        return splitNames(databaseConnection.getValueFromDatabase(isFirstName, isSurname, databaseConnection.COLUMN_VOCATIVE, name));
+        String[] result = databaseConnection.getValuesFromDatabase(isFirstName, isSurname, name, databaseConnection.COLUMN_VOCATIVE);
+        if (result == null) {
+            return null;
+        }
+        return splitNames(result[0]);
     }
 
     private String splitNames(String multipleValues) {
