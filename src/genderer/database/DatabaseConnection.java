@@ -1,4 +1,4 @@
-package matous.database;
+package genderer.database;
 
 /*
  * Connection to database with two tables containing first names and surnames.
@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    PostgreSQL postgreSQL;
+    genderer.database.PostgreSQL postgreSQL;
 
     public final String TABLE_FIRST_NAME = "names_inflection_first_name";
     public final String TABLE_SURNAME = "names_inflection_surname";
@@ -50,7 +50,7 @@ public class DatabaseConnection {
          * Get value from database at certain column.
          */
 
-        int wantedIndexAtResultSet = Integer.parseInt(getIndexAtResultSet(getColumn));
+        int wantedIndexAtResultSet = Integer.parseInt(getIndexAtResultSet(wantedValue));
         ResultSet rs;
         String value;
 

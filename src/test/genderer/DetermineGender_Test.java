@@ -1,14 +1,14 @@
-package test.matous;
+package test.genderer;
 
 /*
  * Genderer class and Inflectioner class tested together.
  * Results depends on data inserted in database tables.
  */
 
-        import matous.Genderer;
+        import genderer.Genderer;
 
-        import matous.Inflectioner;
-        import matous.database.DatabaseConnection;
+        import genderer.Inflectioner;
+        import genderer.database.DatabaseConnection;
         import org.junit.jupiter.api.Test;
 
         import static org.junit.jupiter.api.Assertions.assertEquals;

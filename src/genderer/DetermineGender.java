@@ -1,4 +1,4 @@
-package matous;
+package genderer;
 
 /*
  * Determine gender from received name by name occurrence.
@@ -26,7 +26,7 @@ package matous;
 
 import javax.swing.*;
 
-import matous.database.DatabaseConnection;
+import genderer.database.DatabaseConnection;
 
 public class DetermineGender {
 

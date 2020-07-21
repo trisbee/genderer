@@ -1,4 +1,4 @@
-package test.matous;
+package test.genderer;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

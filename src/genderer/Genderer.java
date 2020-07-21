@@ -1,10 +1,10 @@
-package matous;
+package genderer;
 
 /*
  * Methods returns gender.
  */
 
-import matous.database.DatabaseConnection;
+import genderer.database.DatabaseConnection;
 
 public class Genderer {
 

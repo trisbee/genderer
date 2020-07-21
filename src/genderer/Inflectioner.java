@@ -1,10 +1,10 @@
-package matous;
+package genderer;
 
 /*
  * Methods returns vocative form name.
  */
 
-import matous.database.DatabaseConnection;
+import genderer.database.DatabaseConnection;
 
 public class Inflectioner {
 
