@@ -7,10 +7,10 @@ public class PostgreSQL {
     private Statement statement = null;
     public boolean isConnected = false;
 
-    PostgreSQL() {
+    public PostgreSQL() {
     }
 
-    boolean connect() {
+    public boolean connect() {
         isConnected = false;
         try {
             // Access data get from Environment Variables.
@@ -39,7 +39,7 @@ public class PostgreSQL {
         return isConnected;
     }
 
-    ResultSet query(String sqlQuery) {
+    public ResultSet query(String sqlQuery) {
         /*
         * Execute SQL query.
         * Return response in ResultSet.

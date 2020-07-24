@@ -8,7 +8,8 @@ package test.genderer;
         import genderer.Genderer;
 
         import genderer.Inflectioner;
-        import genderer.database.DatabaseConnection;
+        import genderer.DatabaseConnection;
+        import genderer.database.PostgreSQL;
         import org.junit.jupiter.api.Test;
 
         import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,11 +20,13 @@ public class DetermineGender_Test {
     Inflectioner inflectioner;
 
     public DetermineGender_Test() {
-        DatabaseConnection dc = new DatabaseConnection();
-        if (!dc.connect()) {
+        DatabaseConnection dc;
+        PostgreSQL postgreSQL = new PostgreSQL();
+        if (!postgreSQL.connect()) {
             System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
             return;
         }
+        dc = new DatabaseConnection(postgreSQL);
         genderer = new Genderer(dc);
         inflectioner = new Inflectioner(dc);
     }

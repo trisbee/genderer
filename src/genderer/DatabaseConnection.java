@@ -1,7 +1,8 @@
-package genderer.database;
+package genderer;
 
 /*
- * Connection to database with two tables containing first names and surnames.
+ * Constructor need to receive connection to database. This object can execute queries.
+ * Database should contain two tables with first names and surnames.
  * Table names: "names_inflection_first_name", "names_inflection_surname".
  * Table columns:
  *     "id" uuid NOT NULL,
@@ -12,8 +13,10 @@ package genderer.database;
  *     "name_vocative" text,
  *     "occurrence_cr" integer.
  *
- * Multiple vocative form names are separated by colon.
+ * Multiple vocative form names are separated by colon at column "name_vocative".
  */
+
+import genderer.database.PostgreSQL;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,21 +25,16 @@ public class DatabaseConnection {
 
     genderer.database.PostgreSQL postgreSQL;
 
+    // Variables with table names and column names at database.
     final String TABLE_FIRST_NAME = "names_inflection_first_name";
     final String TABLE_SURNAME = "names_inflection_surname";
     final String COLUMN_GENDER = "sex";
     final String COLUMN_NOMINATIVE = "name_nominative";
     final String COLUMN_VOCATIVE = "name_vocative";
     final String COLUMN_OCCURRENCE = "occurrence_cr";
-//    public final String VALUE_MALE = "MALE";
-//    public final String VALUE_FEMALE = "FEMALE";
 
-    public DatabaseConnection() {
-        postgreSQL = new PostgreSQL();
-    }
-
-    public boolean connect() {
-        return postgreSQL.connect();
+    public DatabaseConnection(PostgreSQL postgreSQL) {
+        this.postgreSQL = postgreSQL;
     }
 
     public String gender_firstName(String name) {

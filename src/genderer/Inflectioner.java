@@ -4,8 +4,6 @@ package genderer;
  * Methods returns vocative form name.
  */
 
-import genderer.database.DatabaseConnection;
-
 public class Inflectioner {
 
     DatabaseConnection databaseConnection;

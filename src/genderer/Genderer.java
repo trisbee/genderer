@@ -4,8 +4,6 @@ package genderer;
  * Methods returns gender.
  */
 
-import genderer.database.DatabaseConnection;
-
 public class Genderer {
 
     DatabaseConnection databaseConnection;
