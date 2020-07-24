@@ -22,12 +22,12 @@ public class DatabaseConnection {
 
     genderer.database.PostgreSQL postgreSQL;
 
-    public final String TABLE_FIRST_NAME = "names_inflection_first_name";
-    public final String TABLE_SURNAME = "names_inflection_surname";
-    public final String COLUMN_GENDER = "sex";
-    public final String COLUMN_NOMINATIVE = "name_nominative";
-    public final String COLUMN_VOCATIVE = "name_vocative";
-    public final String COLUMN_OCCURRENCE = "occurrence_cr";
+    final String TABLE_FIRST_NAME = "names_inflection_first_name";
+    final String TABLE_SURNAME = "names_inflection_surname";
+    final String COLUMN_GENDER = "sex";
+    final String COLUMN_NOMINATIVE = "name_nominative";
+    final String COLUMN_VOCATIVE = "name_vocative";
+    final String COLUMN_OCCURRENCE = "occurrence_cr";
 //    public final String VALUE_MALE = "MALE";
 //    public final String VALUE_FEMALE = "FEMALE";
 
@@ -37,6 +37,38 @@ public class DatabaseConnection {
 
     public boolean connect() {
         return postgreSQL.connect();
+    }
+
+    public String gender_firstName(String name) {
+        String[] result = getValuesFromDatabase(name, TABLE_FIRST_NAME, COLUMN_GENDER);
+        if (result == null) {
+            return null;
+        }
+        return result[0];
+    }
+
+    public String gender_surname(String name) {
+        String[] result = getValuesFromDatabase(name, TABLE_SURNAME, COLUMN_GENDER);
+        if (result == null) {
+            return null;
+        }
+        return result[0];
+    }
+
+    public String vocativeName_firstName(String name) {
+        String[] result = getValuesFromDatabase(name, TABLE_FIRST_NAME, COLUMN_VOCATIVE);
+        if (result == null) {
+            return null;
+        }
+        return result[0];
+    }
+
+    public String vocativeName_surname(String name) {
+        String[] result = getValuesFromDatabase(name, TABLE_SURNAME, COLUMN_VOCATIVE);
+        if (result == null) {
+            return null;
+        }
+        return result[0];
     }
 
     public String[] getValuesFromDatabase(String name, String tableName, String ... columnNames) {
