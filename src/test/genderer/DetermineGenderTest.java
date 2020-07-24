@@ -128,4 +128,3 @@ public class DetermineGenderTest {
         return gender.toString();
     }
 }
-
