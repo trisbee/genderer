@@ -7,8 +7,8 @@ Two classes provides methods which search passed name in tables, returns most oc
 ### Genderer class
 Methods returns gender. Examples:
 ```
-firstName("Petr") &nbsp; // Returns String "Petře".
-firstNameAndSurname("Petra" "Nováková") &nbsp; // Returns String "Petro Nováková".
+firstName("Petr") &nbsp; // Returns String "MALE".
+firstNameAndSurname("Petra" "Nováková") &nbsp; // Returns String "FEMALE".
 ```
 
 ### Inflectioner class
