@@ -17,6 +17,7 @@ package genderer;
  */
 
 import genderer.database.PostgreSQL;
+import genderer.enumeration.Gender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class DatabaseConnection {
 
     genderer.database.PostgreSQL postgreSQL;
 
-    // Variables with table names and column names at database.
+    // Variables with table names, column names and values at database.
     final String TABLE_FIRST_NAME = "names_inflection_first_name";
     final String TABLE_SURNAME = "names_inflection_surname";
     final String COLUMN_GENDER = "sex";
@@ -37,20 +38,28 @@ public class DatabaseConnection {
         this.postgreSQL = postgreSQL;
     }
 
-    public String gender_firstName(String name) {
-        String[] result = getValuesFromDatabase(name, TABLE_FIRST_NAME, COLUMN_GENDER);
-        if (result == null) {
-            return null;
-        }
-        return result[0];
+    public Gender gender_firstName(String name) {
+        return gender(name, TABLE_FIRST_NAME);
     }
 
-    public String gender_surname(String name) {
-        String[] result = getValuesFromDatabase(name, TABLE_SURNAME, COLUMN_GENDER);
+    public Gender gender_surname(String name) {
+        return gender(name, TABLE_SURNAME);
+    }
+
+    private Gender gender(String name, String tableName) {
+        String[] result = getValuesFromDatabase(name, tableName, COLUMN_GENDER);
         if (result == null) {
             return null;
         }
-        return result[0];
+        if (result[0].equals(Gender.MALE.toString())) {
+            return Gender.MALE;
+        }
+        else if (result[0].equals(Gender.FEMALE.toString())) {
+            return Gender.FEMALE;
+        }
+        else {
+            return null;
+        }
     }
 
     public String vocativeName_firstName(String name) {

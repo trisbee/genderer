@@ -5,10 +5,10 @@ Java library to determine gender or vocative form name by name in Czech language
 Two classes provides methods which search passed name in tables, returns most occurrence case.
 
 ### Genderer class
-Methods returns gender. Examples:
+Methods returns gender. Returned value is Gender enumeration. Examples:
 ```
-firstName("Petr") &nbsp; // Returns String "MALE".
-firstNameAndSurname("Petra" "Nováková") &nbsp; // Returns String "FEMALE".
+firstName("Petr") &nbsp; // Returns Gender "MALE".
+firstNameAndSurname("Petra" "Nováková") &nbsp; // Returns Gender "FEMALE".
 ```
 
 ### Inflectioner class

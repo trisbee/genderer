@@ -10,11 +10,15 @@ import genderer.Genderer;
 import genderer.Inflectioner;
 import genderer.DatabaseConnection;
 import genderer.database.PostgreSQL;
+import genderer.enumeration.Gender;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DetermineGenderTest {
+
+    DatabaseConnection dc;
+    PostgreSQL postgreSQL;
 
     Genderer genderer;
     Inflectioner inflectioner;
@@ -37,8 +41,7 @@ public class DetermineGenderTest {
          * "Koval" is male surname (662) and female surname (100).
          */
 
-        DatabaseConnection dc;
-        PostgreSQL postgreSQL = new PostgreSQL();
+        postgreSQL = new PostgreSQL();
         if (!postgreSQL.connect()) {
             System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
             return;
@@ -60,7 +63,7 @@ public class DetermineGenderTest {
                 {{"", ""}, {null, null}},
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.firstName(name[0][0]));
+            assertEquals(name[1][0], enumGenderToString(genderer.firstName(name[0][0])));
             assertEquals(name[1][1], inflectioner.firstName(name[0][0]));
         }
 
@@ -77,7 +80,7 @@ public class DetermineGenderTest {
                 {{"", "M"}, {null, null}},
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.surname(name[0][1]));
+            assertEquals(name[1][0], enumGenderToString(genderer.surname(name[0][1])));
             assertEquals(name[1][1], inflectioner.surname(name[0][1]));
         }
 
@@ -90,7 +93,7 @@ public class DetermineGenderTest {
                 {{"George", "Hill"}, {"MALE", "George Hille"}},
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.firstNameAndSurname(name[0][0], name[0][1]));
+            assertEquals(name[1][0], enumGenderToString(genderer.firstNameAndSurname(name[0][0], name[0][1])));
             assertEquals(name[1][1], inflectioner.firstNameAndSurname(name[0][0], name[0][1]));
         }
 
@@ -107,14 +110,22 @@ public class DetermineGenderTest {
                 {{"Jára", "Cimrman"}, {null, "Járo Cimrmane", "FEMALE", "Járo Cimrmane"}},  // Note: there is only female first name "Jára".
         };
         for (String[][] name : names) {
-            assertEquals(name[1][0], genderer.firstNameAndSurname(name[0][0], name[0][1]));
+            assertEquals(name[1][0], enumGenderToString(genderer.firstNameAndSurname(name[0][0], name[0][1])));
             assertEquals(name[1][1], inflectioner.firstNameAndSurname(name[0][0], name[0][1]));
         }
         // First name and surname - random - used method vocativeName_isFound():
         for (String[][] name : names) {
-            assertEquals(name[1][2], genderer.firstNameAndSurname_preferFirstName(name[0][0], name[0][1]));
+            assertEquals(name[1][2], enumGenderToString(genderer.firstNameAndSurname_preferFirstName(name[0][0], name[0][1])));
             assertEquals(name[1][3], inflectioner.firstNameAndSurname_bothNamesVocative(name[0][0], name[0][1]));
         }
         postgreSQL.disconnect();
     }
+
+    String enumGenderToString(Gender gender) {
+        if (gender == null) {
+            return null;
+        }
+        return gender.toString();
+    }
 }
+

@@ -4,6 +4,8 @@ package genderer;
  * Methods returns gender.
  */
 
+import genderer.enumeration.Gender;
+
 public class Genderer {
 
     DatabaseConnection databaseConnection;
@@ -12,23 +14,23 @@ public class Genderer {
         this.databaseConnection = databaseConnection;
     }
 
-    public String firstName(String firstName) {
+    public Gender firstName(String firstName) {
         return databaseConnection.gender_firstName(firstName);
     }
 
-    public String surname(String surname) {
+    public Gender surname(String surname) {
         return databaseConnection.gender_surname(surname);
     }
 
-    public String firstNameAndSurname(String firstName, String surname) {
+    public Gender firstNameAndSurname(String firstName, String surname) {
         /*
          * Return gender determined by first name and surname.
          * If contradict each other, return "null".
          * If not found, return "null".
          */
 
-        String gender_firstName = firstName(firstName);
-        String gender_surname = surname(surname);
+        Gender gender_firstName = firstName(firstName);
+        Gender gender_surname = surname(surname);
 
         if (gender_firstName != null && gender_surname != null && !gender_firstName.equals(gender_surname)) {
             return null;
@@ -41,15 +43,15 @@ public class Genderer {
         }
     }
 
-    public String firstNameAndSurname_preferFirstName(String firstName, String surname) {
+    public Gender firstNameAndSurname_preferFirstName(String firstName, String surname) {
         /*
          * Return gender determined by first name and surname.
          * If contradict each other, prefer first name.
          * If not found, return "null".
          */
 
-        String gender_firstName = firstName(firstName);
-        String gender_surname = surname(surname);
+        Gender gender_firstName = firstName(firstName);
+        Gender gender_surname = surname(surname);
 
         if (gender_firstName != null) {
             return gender_firstName;
