@@ -43,6 +43,8 @@ public class DetermineGender {
         dc = new DatabaseConnection(postgreSQL);
         genderer = new Genderer(dc);
         inflectioner = new Inflectioner(dc);
+        // Use functionalities...
+        postgreSQL.disconnect();
     }
 
     public static void main(String[] args) {

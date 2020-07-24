@@ -39,6 +39,17 @@ public class PostgreSQL {
         return isConnected;
     }
 
+    public void disconnect() {
+        try {
+            connect.close();
+            isConnected = !connect.isClosed();
+        }
+        catch (SQLException e1) {
+            System.out.println("SQLException  PostgreSQL.disconnect()  " + e1.getMessage());
+            e1.printStackTrace();
+        }
+    }
+
     public ResultSet query(String sqlQuery) {
         /*
         * Execute SQL query.

@@ -5,14 +5,14 @@ package test.genderer;
  * Results depends on data inserted in database tables.
  */
 
-        import genderer.Genderer;
+import genderer.Genderer;
 
-        import genderer.Inflectioner;
-        import genderer.DatabaseConnection;
-        import genderer.database.PostgreSQL;
-        import org.junit.jupiter.api.Test;
+import genderer.Inflectioner;
+import genderer.DatabaseConnection;
+import genderer.database.PostgreSQL;
+import org.junit.jupiter.api.Test;
 
-        import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DetermineGenderTest {
 
@@ -20,15 +20,6 @@ public class DetermineGenderTest {
     Inflectioner inflectioner;
 
     public DetermineGenderTest() {
-        DatabaseConnection dc;
-        PostgreSQL postgreSQL = new PostgreSQL();
-        if (!postgreSQL.connect()) {
-            System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
-            return;
-        }
-        dc = new DatabaseConnection(postgreSQL);
-        genderer = new Genderer(dc);
-        inflectioner = new Inflectioner(dc);
     }
 
     @Test
@@ -45,6 +36,16 @@ public class DetermineGenderTest {
          * "Martina" is female first name (81543), male surname (25) and male first name (1).
          * "Koval" is male surname (662) and female surname (100).
          */
+
+        DatabaseConnection dc;
+        PostgreSQL postgreSQL = new PostgreSQL();
+        if (!postgreSQL.connect()) {
+            System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
+            return;
+        }
+        dc = new DatabaseConnection(postgreSQL);
+        genderer = new Genderer(dc);
+        inflectioner = new Inflectioner(dc);
 
         // First name:
         names = new String[][][] {
@@ -114,5 +115,6 @@ public class DetermineGenderTest {
             assertEquals(name[1][2], genderer.firstNameAndSurname_preferFirstName(name[0][0], name[0][1]));
             assertEquals(name[1][3], inflectioner.firstNameAndSurname_bothNamesVocative(name[0][0], name[0][1]));
         }
+        postgreSQL.disconnect();
     }
 }
