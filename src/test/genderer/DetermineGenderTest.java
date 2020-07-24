@@ -14,12 +14,12 @@ package test.genderer;
 
         import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DetermineGender_Test {
+public class DetermineGenderTest {
 
     Genderer genderer;
     Inflectioner inflectioner;
 
-    public DetermineGender_Test() {
+    public DetermineGenderTest() {
         DatabaseConnection dc;
         PostgreSQL postgreSQL = new PostgreSQL();
         if (!postgreSQL.connect()) {
