@@ -15,11 +15,11 @@ public class Inflectioner {
     }
 
     public String firstName(String firstName) {
-        return vocativeName(true, false, firstName);
+        return vocativeName(firstName, databaseConnection.TABLE_FIRST_NAME);
     }
 
     public String surname(String surname) {
-        return vocativeName(false, true, surname);
+        return vocativeName(surname, databaseConnection.TABLE_SURNAME);
     }
 
     public String firstNameAndSurname(String firstName, String surname) {
@@ -83,8 +83,8 @@ public class Inflectioner {
         }
     }
 
-    private String vocativeName(boolean isFirstName, boolean isSurname, String name) {
-        String[] result = databaseConnection.getValuesFromDatabase(isFirstName, isSurname, name, databaseConnection.COLUMN_VOCATIVE);
+    private String vocativeName(String name, String tableName) {
+        String[] result = databaseConnection.getValuesFromDatabase(name, tableName, databaseConnection.COLUMN_VOCATIVE);
         if (result == null) {
             return null;
         }

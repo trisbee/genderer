@@ -39,7 +39,7 @@ public class DatabaseConnection {
         return postgreSQL.connect();
     }
 
-    public String[] getValuesFromDatabase(boolean isFirstName, boolean isSurname, String name, String ... columnNames) {
+    public String[] getValuesFromDatabase(String name, String tableName, String ... columnNames) {
         /*
          * Get value from database at certain column.
          */
@@ -47,7 +47,7 @@ public class DatabaseConnection {
         ResultSet rs;
         String[] values = new String[columnNames.length];
 
-        rs = databaseQuery(isFirstName, isSurname, name, columnNames);
+        rs = databaseQuery(name, tableName, columnNames);
 
         if (rs == null) {  // TODO Is right solution? It is wanted?
             return null;
@@ -70,31 +70,21 @@ public class DatabaseConnection {
         return values;
     }
 
-    private ResultSet databaseQuery(boolean isFirstName, boolean isSurname, String name, String ... columnNames) {
+    private ResultSet databaseQuery(String name, String tableName, String ... columnNames) {
         /*
          * Execute query on database.
-         * Returns ResultSet containing one record of name with two values: gender and vocative name form.
+         * Returns ResultSet containing one record with values from passed columns.
          */
 
-        String table;
         String query_selectColumns;
 
-        if (isFirstName) {
-            table = TABLE_FIRST_NAME;
-        }
-        else if (isSurname) {
-            table = TABLE_SURNAME;
-        }
-        else {
-            return null;
-        }
         query_selectColumns = columnNames[0];
         for (int i1 = 1; i1 < columnNames.length; i1++) {
             query_selectColumns += ", " + columnNames[i1];
         }
 
         String sqlQuery = "SELECT " + query_selectColumns +
-                " FROM " + table + " WHERE " + COLUMN_NOMINATIVE + " = '" + name +
+                " FROM " + tableName + " WHERE " + COLUMN_NOMINATIVE + " = '" + name +
                 "' ORDER BY " + COLUMN_OCCURRENCE + " DESC LIMIT 1;";
 
         return postgreSQL.query(sqlQuery);

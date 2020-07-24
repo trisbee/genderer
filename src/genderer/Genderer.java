@@ -15,11 +15,11 @@ public class Genderer {
     }
 
     public String firstName(String firstName) {
-        return gender(true, false, firstName);
+        return gender(firstName, databaseConnection.TABLE_FIRST_NAME);
     }
 
     public String surname(String surname) {
-        return gender(false, true, surname);
+        return gender(surname, databaseConnection.TABLE_SURNAME);
     }
 
     public String firstNameAndSurname(String firstName, String surname) {
@@ -61,8 +61,8 @@ public class Genderer {
         }
     }
 
-    private String gender(boolean isFirstName, boolean isSurname, String name) {
-        String[] result = databaseConnection.getValuesFromDatabase(isFirstName, isSurname, name, databaseConnection.COLUMN_GENDER);
+    private String gender(String name, String tableName) {
+        String[] result = databaseConnection.getValuesFromDatabase(name, tableName, databaseConnection.COLUMN_GENDER);
         if (result == null) {
             return null;
         }
