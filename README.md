@@ -7,15 +7,22 @@ Two classes provides methods which search passed name in tables, returns most oc
 ### Genderer class
 Methods returns gender. Returned value is Gender enumeration. Examples:
 ```
-firstName("Petr") &nbsp; // Returns Gender "MALE".
-firstNameAndSurname("Petra" "Nováková") &nbsp; // Returns Gender "FEMALE".
+firstName("Petr")  Returns Gender "MALE".
+surname("Procházková")  Returns Gender "FEMALE".
+firstNameAndSurname("Petra" "Nováková")  Returns Gender "FEMALE".
+firstNameAndSurname("Jiří" "Svobodová")  Returns null.
+firstNameAndSurname_preferFirstName("Jiří" "Svobodová")  Returns Gender "MALE".
+firstNameAndSurname_preferSurname("Jiří" "Svobodová")  Returns Gender "FEMALE".
 ```
 
 ### Inflectioner class
 Methods returns vocative form name. Examples:
 ```
-surname("Procházková") &nbsp; // Returns String "Procházková".
-firstNameAndSurname("Tomáš" "Kučera") &nbsp; // Returns String "Tomáši Kučero".
+firstName("Věra")  Returns String "Věro".
+surname("Procházka")  Returns String "Procházko".
+firstNameAndSurname("Tomáš" "Kučera")  Returns String "Tomáši Kučero".
+firstNameAndSurname("Tomáš" "Xyz")  Returns String "Tomáši Xyz".
+firstNameAndSurname_bothNamesVocative("Tomáš" "Xyz")  Returns null.
 ```
 
 ## Data source

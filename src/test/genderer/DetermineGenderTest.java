@@ -29,9 +29,9 @@ public class DetermineGenderTest {
     @Test
     void test() {
         String[][][] names;
-        // 3D array "String[][][] names": every row contains two columns with several values.
+        // 3D array "String[][][] names": every 'row' contains two 'columns' with several values.
         // First column (input) contains first name and surname.
-        // Second column (output) contains gender, vocative name and eventual another value.
+        // Second column (output) contains gender, vocative name and eventual another values.
 
         /*
          * Czech names points of interests:
@@ -86,38 +86,41 @@ public class DetermineGenderTest {
 
         // First name and surname:
         names = new String[][][] {
-                {{"Martina", "Martina"}, {null, "Martino Martino"}},
-                {{"Martin", "Martin"}, {"MALE", "Martine Martine"}},
-                {{"Martina", "Martin"}, {null, "Martino Martine"}},
-                {{"Martin", "Martina"}, {"MALE", "Martine Martino"}},
-                {{"George", "Hill"}, {"MALE", "George Hille"}},
+                {{"Martina", "Martina"}, {null, "Martino Martino", "FEMALE", "MALE", "Martino Martino"}},
+                {{"Martin", "Martin"}, {"MALE", "Martine Martine", "MALE", "MALE", "Martine Martine"}},
+                {{"Martina", "Martin"}, {null, "Martino Martine", "FEMALE", "MALE", "Martino Martine"}},
+                {{"Martin", "Martina"}, {"MALE", "Martine Martino", "MALE", "MALE", "Martine Martino"}},
+                {{"George", "Hill"}, {"MALE", "George Hille", "MALE", "MALE", "George Hille"}},
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], enumGenderToString(genderer.firstNameAndSurname(name[0][0], name[0][1])));
             assertEquals(name[1][1], inflectioner.firstNameAndSurname(name[0][0], name[0][1]));
+            assertEquals(name[1][2], enumGenderToString(genderer.firstNameAndSurname_preferFirstName(name[0][0], name[0][1])));
+            assertEquals(name[1][3], enumGenderToString(genderer.firstNameAndSurname_preferSurname(name[0][0], name[0][1])));
+            assertEquals(name[1][4], inflectioner.firstNameAndSurname_bothNamesVocative(name[0][0], name[0][1]));
         }
 
         // First name and surname - random:
         names = new String[][][] {
-                {{"", ""}, {null, null, null, null}},
-                {{"abc", ""}, {null, "abc", null, null}},
-                {{"", "abc"}, {null, "abc", null, null}},
-                {{"-", ""}, {null, "-", null, null}},
-                {{"", "-"}, {null, "-", null, null}},
-                {{"", "abc_-*"}, {null, "abc_-*", null, null}},
-                {{"Martina", ""}, {"FEMALE", "Martino", "FEMALE", null}},
-                {{"", "Martina"}, {"MALE", "Martino", "MALE", null}},
-                {{"Jára", "Cimrman"}, {null, "Járo Cimrmane", "FEMALE", "Járo Cimrmane"}},  // Note: there is only female first name "Jára".
+                {{"", ""}, {null, null, null, null, null}},
+                {{"abc", ""}, {null, "abc", null, null, null}},
+                {{"", "abc"}, {null, "abc", null, null, null}},
+                {{"-", ""}, {null, "-", null, null, null}},
+                {{"", "-"}, {null, "-", null, null, null}},
+                {{"", "abc_-*"}, {null, "abc_-*", null, null, null}},
+                {{"Martina", ""}, {"FEMALE", "Martino", "FEMALE", "FEMALE", null}},
+                {{"", "Martina"}, {"MALE", "Martino", "MALE", "MALE", null}},
+                {{"Jára", "Cimrman"}, {null, "Járo Cimrmane", "FEMALE", "MALE", "Járo Cimrmane"}},  // Note: there is only female first name "Jára".
         };
         for (String[][] name : names) {
             assertEquals(name[1][0], enumGenderToString(genderer.firstNameAndSurname(name[0][0], name[0][1])));
             assertEquals(name[1][1], inflectioner.firstNameAndSurname(name[0][0], name[0][1]));
-        }
-        // First name and surname - random - used method vocativeName_isFound():
-        for (String[][] name : names) {
             assertEquals(name[1][2], enumGenderToString(genderer.firstNameAndSurname_preferFirstName(name[0][0], name[0][1])));
-            assertEquals(name[1][3], inflectioner.firstNameAndSurname_bothNamesVocative(name[0][0], name[0][1]));
+            assertEquals(name[1][3], enumGenderToString(genderer.firstNameAndSurname_preferSurname(name[0][0], name[0][1])));
+            assertEquals(name[1][4], inflectioner.firstNameAndSurname_bothNamesVocative(name[0][0], name[0][1]));
         }
+
+        // Disconnect database.
         postgreSQL.disconnect();
     }
 
