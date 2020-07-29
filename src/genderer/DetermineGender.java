@@ -26,6 +26,7 @@ package genderer;
 
 import javax.swing.*;
 
+import genderer.database.Database;
 import genderer.database.PostgreSQL;
 
 public class DetermineGender {
@@ -35,16 +36,16 @@ public class DetermineGender {
 
     public DetermineGender() {
         DatabaseConnection dc;
-        PostgreSQL postgreSQL = new PostgreSQL();
-        if (!postgreSQL.connect()) {
+        Database database = new PostgreSQL();
+        if (!database.connect()) {
             System.out.println("DetermineGender.DetermineGender()  Database not connected.");
             return;
         }
-        dc = new DatabaseConnection(postgreSQL);
+        dc = new DatabaseConnection(database);
         genderer = new Genderer(dc);
         inflectioner = new Inflectioner(dc);
         // Use functionalities...
-        postgreSQL.disconnect();
+        database.disconnect();
     }
 
     public static void main(String[] args) {

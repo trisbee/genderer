@@ -2,7 +2,7 @@ package genderer.database;
 
 import java.sql.*;
 
-public class PostgreSQL {
+public class PostgreSQL implements Database {
     private Connection connect = null;
     private Statement statement = null;
     public boolean isConnected = false;
@@ -53,7 +53,7 @@ public class PostgreSQL {
     public ResultSet query(String sqlQuery) {
         /*
         * Execute SQL query.
-        * Return response in ResultSet.
+        * Returns response in ResultSet.
          */
 
         ResultSet rs;
