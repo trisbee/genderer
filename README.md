@@ -25,5 +25,8 @@ firstNameAndSurname("Tomáš" "Xyz")  Returns String "Tomáši Xyz".
 firstNameAndSurname_bothNamesVocative("Tomáš" "Xyz")  Returns null.
 ```
 
+## Database queries execution needs
+DatabaseConnection constructor receiving instrument to connect to database. This instrument should implement Database interface.
+
 ## Data source
 Data source comes from the government official database ([MVCR](https://www.mvcr.cz/)) with contributing of authors working on Genderer project.

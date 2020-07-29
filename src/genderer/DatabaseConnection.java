@@ -16,7 +16,7 @@ package genderer;
  * Multiple vocative form names are separated by colon at column "name_vocative".
  */
 
-import genderer.database.PostgreSQL;
+import genderer.database.Database;
 import genderer.enumeration.Gender;
 
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    genderer.database.PostgreSQL postgreSQL;
+    Database database;
 
     // Variables with table names, column names and values at database.
     final String TABLE_FIRST_NAME = "names_inflection_first_name";
@@ -34,8 +34,8 @@ public class DatabaseConnection {
     final String COLUMN_VOCATIVE = "name_vocative";
     final String COLUMN_OCCURRENCE = "occurrence_cr";
 
-    public DatabaseConnection(PostgreSQL postgreSQL) {
-        this.postgreSQL = postgreSQL;
+    public DatabaseConnection(Database database) {
+        this.database = database;
     }
 
     public Gender gender_firstName(String name) {
@@ -126,6 +126,6 @@ public class DatabaseConnection {
                 " FROM " + tableName + " WHERE " + COLUMN_NOMINATIVE + " = '" + name +
                 "' ORDER BY " + COLUMN_OCCURRENCE + " DESC LIMIT 1;";
 
-        return postgreSQL.query(sqlQuery);
+        return database.query(sqlQuery);
     }
 }

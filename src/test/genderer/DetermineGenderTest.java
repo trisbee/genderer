@@ -9,6 +9,7 @@ import genderer.Genderer;
 
 import genderer.Inflectioner;
 import genderer.DatabaseConnection;
+import genderer.database.Database;
 import genderer.database.PostgreSQL;
 import genderer.enumeration.Gender;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DetermineGenderTest {
 
     DatabaseConnection dc;
-    PostgreSQL postgreSQL;
+    Database database;
 
     Genderer genderer;
     Inflectioner inflectioner;
@@ -41,12 +42,12 @@ public class DetermineGenderTest {
          * "Koval" is male surname (662) and female surname (100).
          */
 
-        postgreSQL = new PostgreSQL();
-        if (!postgreSQL.connect()) {
+        database = new PostgreSQL();
+        if (!database.connect()) {
             System.out.println("Genderer_Test.Genderer_Test()  Database not connected.");
             return;
         }
-        dc = new DatabaseConnection(postgreSQL);
+        dc = new DatabaseConnection(database);
         genderer = new Genderer(dc);
         inflectioner = new Inflectioner(dc);
 
@@ -121,7 +122,7 @@ public class DetermineGenderTest {
         }
 
         // Disconnect database.
-        postgreSQL.disconnect();
+        database.disconnect();
     }
 
     String enumGenderToString(Gender gender) {
